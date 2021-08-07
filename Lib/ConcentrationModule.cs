@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Concentration;
 using UnityEngine;
 
@@ -31,6 +32,7 @@ public class ConcentrationModule : MonoBehaviour
     private int _lastSolved;
     private int _curStage;
     private int _lastStage;
+    private bool _isSolved = false;
     private readonly bool[] _revealed = new bool[15];
 
     private readonly Queue<IEnumerator> _animations = new Queue<IEnumerator>();
@@ -79,6 +81,7 @@ public class ConcentrationModule : MonoBehaviour
         yield return new WaitForSeconds(.1f);
         Debug.Log($"[Concentration #{_moduleId}] Module solved.");
         Module.HandlePass();
+        _isSolved = true;
         Led.sharedMaterial = UnlitLed;
     }
 
@@ -253,14 +256,38 @@ public class ConcentrationModule : MonoBehaviour
     }
 
 #pragma warning disable 414
-    private string TwitchHelpMessage = @"“!{0} press button [see the last flip] | !{0} press A1 [presses the card in A1]";
+    private string TwitchHelpMessage = @"“!{0} press A1, B3, C5 [presses the cards in that order]";
 #pragma warning restore 414
 
-    //private IEnumerator ProcessTwitchCommand(string command)
-    //{
-    //}
+    private IEnumerable<KMSelectable> ProcessTwitchCommand(string command)
+    {
+        var btns = new List<KMSelectable>();
+        foreach (var piece in command.Split(','))
+        {
+            var pieceTr = piece.Trim();
+            if (pieceTr.Length < 2)
+                return null;
+            var x = pieceTr[0] >= 'a' && pieceTr[0] <= 'c' ? pieceTr[0] - 'a' : pieceTr[0] >= 'A' && pieceTr[0] <= 'C' ? pieceTr[0] - 'A' : -1;
+            var y = pieceTr[1] >= '1' && pieceTr[1] <= '5' ? pieceTr[1] - '1' : -1;
+            if (x == -1||y == -1)
+                return null;
+            btns.Add(CardSels[x + 3 * y]);
+        }
+        return btns;
+    }
 
-    //IEnumerator TwitchHandleForcedSolve()
-    //{
-    //}
+    IEnumerator TwitchHandleForcedSolve()
+    {
+        while (_curStage < _lastStage)
+            yield return true;
+
+        for (var i = 0; i < 15; i++)
+        {
+            CardSels[Array.IndexOf(_finalOrder, i)].OnInteract();
+            yield return new WaitForSeconds(.1f);
+        }
+
+        while (!_isSolved)
+            yield return true;
+    }
 }
