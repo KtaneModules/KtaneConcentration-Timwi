@@ -14,8 +14,8 @@ MonoBehaviour:
   id: Concentration
   title: Concentration
   author: JakkOfKlubs & Timwi
-  description: "Don\u2019t lose track!\n\nModule created by Timwi.\n\n[url=http://ktane.timwi.de/PDF/Concentration.pdf]Manual
+  description: "Don\u2019t lose track!\n\nModule created by JakkOfKlubs & Timwi.\n\n[url=http://ktane.timwi.de/PDF/Concentration.pdf]Manual
     PDF[/url]\n[url=http://ktane.timwi.de/HTML/Concentration.html]Manual HTML[/url]"
   version: 1.0
   outputFolder: build
-  previewImage: {fileID: 2800000, guid: bd5c1f4881f57d54481b44e4c8a7779a, type: 3}
+  previewImage: {fileID: 2800000, guid: 21887ef8de5be0e41afd0674f9c3f2b2, type: 3}
