@@ -261,15 +261,19 @@ public class ConcentrationModule : MonoBehaviour
 
     private IEnumerable<KMSelectable> ProcessTwitchCommand(string command)
     {
+        var m = Regex.Match(command, @"^\s*(?:press\s+)?(.*)$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+        if (!m.Success)
+            return null;
+
         var btns = new List<KMSelectable>();
-        foreach (var piece in command.Split(','))
+        foreach (var piece in m.Groups[1].Value.Trim().Split(new[] { ',', ';', ' ' }, StringSplitOptions.RemoveEmptyEntries))
         {
             var pieceTr = piece.Trim();
             if (pieceTr.Length < 2)
                 return null;
             var x = pieceTr[0] >= 'a' && pieceTr[0] <= 'c' ? pieceTr[0] - 'a' : pieceTr[0] >= 'A' && pieceTr[0] <= 'C' ? pieceTr[0] - 'A' : -1;
             var y = pieceTr[1] >= '1' && pieceTr[1] <= '5' ? pieceTr[1] - '1' : -1;
-            if (x == -1||y == -1)
+            if (x == -1 || y == -1)
                 return null;
             btns.Add(CardSels[x + 3 * y]);
         }
