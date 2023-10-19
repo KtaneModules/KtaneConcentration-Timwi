@@ -6,7 +6,8 @@ using System.Text.RegularExpressions;
 using Concentration;
 using UnityEngine;
 
-/// <summary>On the Subject of Concentration Created by Timwi</summary>
+// KTANE module Concentration
+// Created by Timwi
 public class ConcentrationModule : MonoBehaviour
 {
     public KMBombInfo Bomb;
@@ -37,7 +38,7 @@ public class ConcentrationModule : MonoBehaviour
 
     private readonly Queue<IEnumerator> _animations = new Queue<IEnumerator>();
 
-    private static readonly string[] _defaultIgnoreList = { "+", "14", "A>N<D", "Black Arrows", "Brainf---", "Busy Beaver", "Concentration", "Cube Synchronization", "Don't Touch Anything", "Duck Konundrum", "Floor Lights", "Forget Enigma", "Forget Any Color", "Forget Everything", "Forget Infinity", "Forget It Not", "Forget Me Not", "Forget Maze Not", "Forget Me Later", "Forget Perspective", "Forget Them All", "Forget This", "Forget The Colors", "Forget Us Not", "Gemory", "Iconic", "Keypad Directionality", "Kugelblitz", "OmegaForget", "Organization", "Out of Time", "Purgatory", "RPS Judging", "Security Council", "Shoddy Chess", "Simon Forgets", "Simon's Stages", "Soulscream", "Souvenir", "Tallordered Keys", "Tetrahedron", "The Board Walk", "The Very Annoying Button", "The Twin", "Ultimate Custom Night", "Whiteout", "Übermodule", "Bamboozling Time Keeper", "Doomsday Button", "OmegaDestroyer", "Password Destroyer", "The Time Keeper", "Timing is Everything", "Turn The Key", "Zener Cards" };
+    private static readonly string[] _defaultIgnoreList = { "MemoryV2", "SouvenirModule", "HexiEvilFMN", "simonsStages", "forgetThis", "PurgatoryModule", "troll", "forgetThemAll", "tallorderedKeys", "forgetEnigma", "forgetUsNot", "qkForgetPerspective", "organizationModule", "veryAnnoyingButton", "forgetMeLater", "ubermodule", "qkUCN", "14", "forgetItNot", "simonForgets", "brainf", "ForgetTheColors", "RPSJudging", "TheTwinModule", "iconic", "omegaForget", "kugelblitz", "ANDmodule", "dontTouchAnything", "busyBeaver", "whiteout", "ForgetAnyColor", "KeypadDirectionality", "SecurityCouncil", "ShoddyChessModule", "FloorLights", "blackArrowsModule", "forgetMazeNot", "plus", "soulscream", "qkCubeSynchronization", "OutOfTime", "tetrahedron", "BoardWalk", "gemory", "duckKonundrum", "ConcentrationModule", "TwisterModule", "forgetOurVoices", "soulsong", "idExchange", "GSEight", "SimpleBoss", "SimpleBossNot", "KritGrandPrix", "ForgetMeMaybeModule", "HyperForget", "qkBitwiseOblivion", "damoclesLumber", "top10nums", "queensWarModule", "forget_fractal", "pointerPointerModule", "slightGibberishTwistModule", "PianoParadoxModule", "Omission", "inOrderModule", "nobodysCodeModule", "perspectiveStackingModule", "ReportingAnomalies", "forgetle", "ActionsAndConsequences", "fizzBoss", "WatchTheClock", "solveShift", "BlackoutModule", "hickoryDickoryDockModule", "xModule", "yModule", "CastorModule", "PolluxModule", "ApplePenModule", "PineapplePenModule", "ReportingAnomalies", "solveShift", "TurnTheKey", "timeKeeper", "timingIsEverything", "bamboozlingTimeKeeper", "pwDestroyer", "omegaDestroyer", "kataZenerCards", "doomsdayButton", "redLightGreenLight", "repeatAgain" };
 
     void Start()
     {
@@ -91,7 +92,7 @@ public class ConcentrationModule : MonoBehaviour
 
         _moduleId = _moduleIdCounter++;
 
-        var allUnignoredModules = Bomb.GetSolvableModuleNames().Except(BossModule.GetIgnoredModules(Module, _defaultIgnoreList)).ToArray();
+        var allUnignoredModules = Bomb.GetSolvableModuleIDs().Except(BossModule.GetIgnoredModuleIDs(Module, _defaultIgnoreList)).ToArray();
         _lastStage = Math.Min(106, allUnignoredModules.Length);
         _unignoredModules = new HashSet<string>(allUnignoredModules);
 
@@ -138,7 +139,7 @@ public class ConcentrationModule : MonoBehaviour
         if (_moduleId < 0)  // module is not yet initialized
             return;
 
-        var solved = Bomb.GetSolvedModuleNames().Where(_unignoredModules.Contains).ToArray();
+        var solved = Bomb.GetSolvedModuleIDs().Where(_unignoredModules.Contains).ToArray();
         for (var i = _lastSolved; i < solved.Length && i < _lastStage; i++)
         {
             _curStage++;

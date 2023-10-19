@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 11420650}
   - component: {fileID: 11489324}
   - component: {fileID: 11496072}
-  - component: {fileID: 114500619446463498}
+  - component: {fileID: 114145923542985492}
   m_Layer: 0
   m_Name: DummyModule
   m_TagString: Untagged
@@ -392,7 +392,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShaderNames:
-  - Mobile/Diffuse
+  - KT/Mobile/DiffuseTint
+--- !u!114 &114145923542985492
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -510556029, guid: abb705d22aca42d4faf9e47e07617f0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Module: {fileID: 11429752}
+  Selectable: {fileID: 114903602279263928}
 --- !u!114 &114355203526925716
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -419,19 +432,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderNames:
   - Legacy Shaders/Diffuse
---- !u!114 &114500619446463498
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 127088}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -510556029, guid: 7f1ede99b67621942b32a0e6960b4494, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Module: {fileID: 11429752}
-  Selectable: {fileID: 11420650}
 --- !u!114 &114903602279263928
 MonoBehaviour:
   m_ObjectHideFlags: 1
