@@ -5,4 +5,5 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "<Pending>", Scope = "member", Target = "~M:ConcentrationModule.Update")]
+[assembly: SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "Unity needs that")]
+[assembly: SuppressMessage("Style", "IDE0044:Add readonly modifier", Justification = "Twitch Plays needs that", Scope = "member", Target = "~F:ConcentrationModule.TwitchHelpMessage")]
